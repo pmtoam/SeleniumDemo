@@ -19,7 +19,8 @@ public class TestSeleniumDemo {
     @Test
     public void testHelloWordl() throws Exception {
         //开启个浏览器并且输入链接
-        WebDriver driver = PageUtils.getChromeDriver("https://www.baidu.com/");
+//        WebDriver driver = PageUtils.getChromeDriver("https://www.baidu.com/");
+        WebDriver driver = PageUtils.getChromeDriver("https://www.baidu.com/s?wd=ip&tn=96826017_hao_pg&ch=2");
         //得到浏览器的标题
         System.out.println(driver.getTitle());
         Thread.sleep(5000);
@@ -32,11 +33,24 @@ public class TestSeleniumDemo {
      * 测试向input标签输入值
      */
     @Test
-    public void testInputStrByJS(){
+    public void testInputStrByJS() throws Exception {
         //开启个浏览器并且输入链接
         WebDriver driver = PageUtils.getChromeDriver("https://www.baidu.com/");
+
         //向input输入值
-        PageUtils.inputStrByJS(driver, "kw", "月之暗面 博客园");
+        //PageUtils.inputStrByJS(driver, "kw", "月之暗面 博客园");
+        PageUtils.inputStrByJS(driver, "kw", "ip");
+
+        //3、得到百度一下的标签
+        WebElement submitElement = driver.findElement(By.cssSelector("input#su"));
+
+        //4、点击百度一下
+        PageUtils.scrollToElementAndClick(submitElement, driver);
+
+        Thread.sleep(5000);
+
+        //关闭浏览器 下面是关闭所有标签页，还有一个代码是 driver.close();, 关闭当前标签页
+        driver.quit();
     }
 
     /**

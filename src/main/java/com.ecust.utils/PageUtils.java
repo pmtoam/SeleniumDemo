@@ -1,11 +1,13 @@
 package com.ecust.utils;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.HashMap;
@@ -171,19 +173,33 @@ public class PageUtils {
     public static WebDriver getChromeDriver(String url) {
 
         //设置谷歌浏览器驱动，我放在项目的路径下，这个驱动可以帮你打开本地的谷歌浏览器
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver_win32\\chromedriver-2.40.exe");
 
 
         // 设置对谷歌浏览器的初始配置           开始
-        HashMap<String, Object> prefs = new HashMap<String, Object>();
+        HashMap<String, Object> prefs = new HashMap<>(0x10);
         //设置禁止图片
-        //prefs.put("profile.managed_default_content_settings.images", 2);
-        //设置禁止cookies
+        prefs.put("profile.managed_default_content_settings.images", 2);
+        ///设置禁止cookies
         //prefs.put("profile.default_content_settings.cookies", 2);
+
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
         DesiredCapabilities chromeCaps = DesiredCapabilities.chrome();
         chromeCaps.setCapability(ChromeOptions.CAPABILITY, options);
+
+        // 设置IP代理
+        // 42.180.121.34:36379 (13:54-14:10)
+        // 114.99.26.145:32799 (14:12-14:17)
+        // 42.59.122.213:62042,751345 (14:27-)
+        // 36.250.156.245:46022,254469 (15:16-15:20)
+        String proxyIpPort = "58.19.15.224:21268";
+        Proxy proxy = new Proxy();
+        proxy.setHttpProxy(proxyIpPort).setFtpProxy(proxyIpPort).setSslProxy(proxyIpPort);
+        chromeCaps.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, Boolean.TRUE);
+        chromeCaps.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, Boolean.TRUE);
+        System.setProperty("http.nonProxyHosts", "localhost");
+        chromeCaps.setCapability(CapabilityType.PROXY, proxy);
         // 设置对谷歌浏览器的初始配置           结束
 
         //新建一个谷歌浏览器对象（driver）
