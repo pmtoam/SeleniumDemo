@@ -91,7 +91,7 @@ public class TestSeleniumDemo {
         WebDriver driver = PageUtils.getChromeDriver("https://www.baidu.com/");
 
         //2、向百度输入框输入需要查询的值
-        PageUtils.inputStrByJS(driver, "kw", "月之暗面 博客园");
+        PageUtils.inputStrByJS(driver, "kw", "王月星 CSDN");
 
         //3、得到百度一下的标签
         WebElement submitElement = driver.findElement(By.cssSelector("input#su"));
