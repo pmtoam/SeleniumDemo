@@ -15,7 +15,7 @@ public class TestIpIsValid {
     public void test() throws Exception {
 //        URL url = new URL("http://www.baidu.com");
         URL url = new URL("http://www.baidu.com/s?wd=ip&tn=96826017_hao_pg&ch=2");
-        String[] split = "114.99.31.46:18729".split(":");
+        String[] split = "106.12.21.166:18673".split(":");
         String hostname = split[0];
         int port = Integer.parseInt(split[1]);
         // 创建代理服务器

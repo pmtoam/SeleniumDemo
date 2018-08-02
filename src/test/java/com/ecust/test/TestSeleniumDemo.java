@@ -35,7 +35,7 @@ public class TestSeleniumDemo {
     @Test
     public void testInputStrByJS() throws Exception {
         //开启个浏览器并且输入链接
-        WebDriver driver = PageUtils.getChromeDriver("https://www.baidu.com/");
+        WebDriver driver = PageUtils.getChromeDriver("http://www.baidu.com/");
 
         //向input输入值
         //PageUtils.inputStrByJS(driver, "kw", "月之暗面 博客园");
@@ -80,6 +80,11 @@ public class TestSeleniumDemo {
 
         //7、点击该链接
         PageUtils.scrollToElementAndClick(aElement, driver);
+
+        Thread.sleep(5000);
+
+        //关闭浏览器 下面是关闭所有标签页，还有一个代码是 driver.close();, 关闭当前标签页
+        driver.quit();
     }
 
     /**
@@ -116,5 +121,10 @@ public class TestSeleniumDemo {
         //9、切换到博客园页面
         PageUtils.getAnotherPage(driver);
         System.out.println("现在的页面是："+driver.getTitle());
+
+        Thread.sleep(5000);
+
+        //关闭浏览器 下面是关闭所有标签页，还有一个代码是 driver.close();, 关闭当前标签页
+        driver.quit();
     }
 }

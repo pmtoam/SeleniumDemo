@@ -179,7 +179,7 @@ public class PageUtils {
         // 设置对谷歌浏览器的初始配置           开始
         HashMap<String, Object> prefs = new HashMap<>(0x10);
         //设置禁止图片
-        prefs.put("profile.managed_default_content_settings.images", 2);
+//        prefs.put("profile.managed_default_content_settings.images", 2);
         ///设置禁止cookies
         //prefs.put("profile.default_content_settings.cookies", 2);
 
@@ -193,7 +193,7 @@ public class PageUtils {
         // 114.99.26.145:32799 (14:12-14:17)
         // 42.59.122.213:62042,751345 (14:27-)
         // 36.250.156.245:46022,254469 (15:16-15:20)
-        String proxyIpPort = "58.19.15.224:21268";
+        String proxyIpPort = "106.12.21.166:18673";
         Proxy proxy = new Proxy();
         proxy.setHttpProxy(proxyIpPort).setFtpProxy(proxyIpPort).setSslProxy(proxyIpPort);
         chromeCaps.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, Boolean.TRUE);
